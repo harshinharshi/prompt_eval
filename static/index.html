@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Evaluation System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .main-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+            color: #667eea;
+            font-size: 1.5em;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 24px;
+            font-size: 1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f0f0f0;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .results-header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-value.excellent {
+            color: #10b981;
+        }
+
+        .stat-value.good {
+            color: #3b82f6;
+        }
+
+        .stat-value.fair {
+            color: #f59e0b;
+        }
+
+        .stat-value.poor {
+            color: #ef4444;
+        }
+
+        .results-grid {
+            display: grid;
+            gap: 20px;
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .result-item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .result-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-task {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+
+        .result-response {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+            font-size: 0.95em;
+        }
+
+        .result-grade {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .grade-badge {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.8em;
+            color: white;
+        }
+
+        .grade-badge.excellent {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        .grade-badge.good {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+
+        .grade-badge.fair {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+
+        .grade-badge.poor {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        }
+
+        .grade-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .grade-reasoning {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            color: #1565c0;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .info-box code {
+            background: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Monaco', monospace;
+        }
+
+        .error-message {
+            background: #fee;
+            border-left: 4px solid #f44336;
+            padding: 15px;
+            border-radius: 6px;
+            color: #c62828;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            background: #efe;
+            border-left: 4px solid #10b981;
+            padding: 15px;
+            border-radius: 6px;
+            color: #065f46;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .main-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .results-grid {
+                max-height: none;
+            }
+
+            .results-header {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 LLM Evaluation System</h1>
+            <p>Evaluate LLM responses with automated grading</p>
+        </header>
+
+        <div class="main-wrapper">
+            <!-- Input Section -->
+            <div class="card">
+                <h2>Evaluation Setup</h2>
+                
+                <div class="form-group">
+                    <label for="goal">Evaluation Goal *</label>
+                    <textarea id="goal" placeholder="e.g., Evaluate the LLM's ability to provide accurate and concise answers to general knowledge questions">
+A math teacher bot that provides educational guidance by giving hints and step-by-step guidance to help students solve math problems themselves, rather than directly providing answers. The bot should encourage critical thinking and problem-solving skills.</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="systemPrompt">System Prompt *</label>
+                    <textarea id="systemPrompt" placeholder="e.g., You are a helpful assistant. Provide clear, concise, and accurate answers.">
+you are a math teacher bot answer according to the query</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="numCases">Number of Test Cases</label>
+                    <input type="number" id="numCases" value="10" min="1" max="50">
+                </div>
+
+                <div class="form-group">
+                    <label for="provider">LLM Provider *</label>
+                    <select id="provider" onchange="updateProviderUI()">
+                        <option value="groq">Groq (Free & Fast)</option>
+                        <option value="openai">OpenAI (GPT)</option>
+                        <option value="anthropic">Anthropic (Claude)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="apiKey">API Key (Optional if set in .env) *</label>
+                    <input type="password" id="apiKey" placeholder="Your API key (loaded from .env if available)">
+                    <small id="apiKeyHint" style="color: #999; margin-top: 5px; display: block;"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="model">Model</label>
+                    <select id="model">
+                        <option value="llama-3.3-70b-versatile">Llama 3.3 70B (default)</option>
+                        <option value="llama-3.1-70b-versatile">Llama 3.1 70B</option>
+                        <option value="llama-3.1-8b-instant">Llama 3.1 8B (fast)</option>
+                        <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
+                        <option value="openai/gpt-oss-120b">GPT-OSS 120B</option>
+                        <option value="openai/gpt-oss-20b">GPT-OSS 20B</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="customCases">Custom Test Cases (JSON) - Optional</label>
+                    <textarea id="customCases" placeholder='[{"task": "What is 2+2?"}, {"task": "What is a car?"}]'></textarea>
+                    <small style="color: #999; margin-top: 5px; display: block;">Leave empty to auto-generate test cases</small>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="startEvaluation()">
+                        <span id="btnText">Start Evaluation</span>
+                        <span id="btnSpinner" style="display: none;">Evaluating...</span>
+                    </button>
+                    <button class="btn-secondary" onclick="clearForm()">Clear</button>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>Running evaluation... This may take a minute.</p>
+                </div>
+            </div>
+
+            <!-- Instructions Section -->
+            <div class="card">
+                <h2>How It Works</h2>
+                
+                <div style="line-height: 1.8; color: #666;">
+                    <h3 style="color: #667eea; margin-top: 15px; margin-bottom: 10px;">1. Input Configuration</h3>
+                    <p>Enter your evaluation goal and the system prompt you want to test.</p>
+
+                    <h3 style="color: #667eea; margin-top: 15px; margin-bottom: 10px;">2. Test Case Generation</h3>
+                    <p>The system generates test cases or uses your custom ones in JSON format.</p>
+
+                    <h3 style="color: #667eea; margin-top: 15px; margin-bottom: 10px;">3. Response Generation</h3>
+                    <p>Selected LLM responds to each test case with the provided system prompt.</p>
+
+                    <h3 style="color: #667eea; margin-top: 15px; margin-bottom: 10px;">4. Automated Grading</h3>
+                    <p>A grading LLM evaluates each response based on your goal (1-10 scale).</p>
+
+                    <h3 style="color: #667eea; margin-top: 15px; margin-bottom: 10px;">5. Results Display</h3>
+                    <p>View individual grades, reasoning, and average score.</p>
+                </div>
+
+                <div class="info-box" style="margin-top: 20px;">
+                    <strong>ℹ️ Requirements</strong>
+                    <div>Set <code>GROQ_API_KEY</code> environment variable with your Groq API key from <a href="https://console.groq.com" style="color: #0066cc;">console.groq.com</a></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section" id="resultsSection">
+            <h2 style="color: #667eea; margin-bottom: 20px; border-bottom: 2px solid #667eea; padding-bottom: 10px;">Evaluation Results</h2>
+
+            <div id="successMessage" class="success-message" style="display: none;">
+                ✓ Evaluation completed successfully!
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <div class="results-header">
+                <div class="stat-box">
+                    <div class="stat-label">Average Grade</div>
+                    <div id="avgGrade" class="stat-value">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Total Cases</div>
+                    <div id="totalCases" class="stat-value" style="color: #667eea;">0</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Evaluation Status</div>
+                    <div class="stat-value" style="color: #10b981;">Completed</div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('details')">Results Details</button>
+                <button class="tab-button" onclick="switchTab('goal')">Goal & Prompt</button>
+            </div>
+
+            <div id="details" class="tab-content active">
+                <div class="results-grid" id="resultsGrid"></div>
+            </div>
+
+            <div id="goal" class="tab-content">
+                <div class="form-group">
+                    <label>Evaluation Goal</label>
+                    <textarea id="displayGoal" readonly style="background: #f5f5f5;"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>System Prompt</label>
+                    <textarea id="displayPrompt" readonly style="background: #f5f5f5;"></textarea>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <button class="btn-secondary" onclick="downloadResults()">📥 Download Results (JSON)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentResults = null;
+
+        const modelsByProvider = {
+            groq: [
+                { value: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B (default)' },
+                { value: 'llama-3.1-70b-versatile', label: 'Llama 3.1 70B' },
+                { value: 'llama-3.1-8b-instant', label: 'Llama 3.1 8B (fast)' },
+                { value: 'mixtral-8x7b-32768', label: 'Mixtral 8x7B' },
+                { value: 'openai/gpt-oss-120b', label: 'GPT-OSS 120B' },
+                { value: 'openai/gpt-oss-20b', label: 'GPT-OSS 20B' }
+            ],
+            openai: [
+                { value: 'gpt-5-4', label: 'GPT-5.4 (Latest Flagship)' },
+                { value: 'gpt-5-4-pro', label: 'GPT-5.4 Pro (Highest Performance)' },
+                { value: 'gpt-5-4-thinking', label: 'GPT-5.4 Thinking (Deep Reasoning)' },
+                { value: 'gpt-5-4-mini', label: 'GPT-5.4 Mini (Fast & Cheap)' },
+                { value: 'gpt-5-4-nano', label: 'GPT-5.4 Nano (Ultra-Lightweight)' },
+                { value: 'gpt-5-2', label: 'GPT-5.2 (Production Proven)' },
+                { value: 'gpt-4o', label: 'GPT-4o (Legacy)' },
+                { value: 'gpt-4-turbo', label: 'GPT-4 Turbo (Legacy)' }
+            ],
+            anthropic: [
+                { value: 'claude-opus-4-6', label: 'Claude Opus 4.6 (Most Powerful)' },
+                { value: 'claude-sonnet-4-6', label: 'Claude Sonnet 4.6 (Balanced)' },
+                { value: 'claude-haiku-4-5', label: 'Claude Haiku 4.5 (Fastest)' },
+                { value: 'claude-opus-4-5', label: 'Claude Opus 4.5 (Previous Gen)' },
+                { value: 'claude-sonnet-4-5', label: 'Claude Sonnet 4.5 (Previous Gen)' },
+                { value: 'claude-3-5-sonnet-20241022', label: 'Claude 3.5 Sonnet (Legacy)' },
+                { value: 'claude-3-opus-20250219', label: 'Claude 3 Opus (Legacy)' }
+            ]
+        };
+
+        const apiKeyEnvVars = {
+            groq: 'GROQ_API_KEY',
+            openai: 'OPENAI_API_KEY',
+            anthropic: 'ANTHROPIC_API_KEY'
+        };
+
+        function updateProviderUI() {
+            const provider = document.getElementById('provider').value;
+            const modelSelect = document.getElementById('model');
+            const apiKeyHint = document.getElementById('apiKeyHint');
+            
+            // Update model options
+            modelSelect.innerHTML = '';
+            const models = modelsByProvider[provider];
+            models.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model.value;
+                option.textContent = model.label;
+                modelSelect.appendChild(option);
+            });
+            
+            // Update API key hint
+            const envVar = apiKeyEnvVars[provider];
+            apiKeyHint.textContent = `Looks for ${envVar} in .env. If not found, enter above.`;
+            
+            console.log(`Provider changed to: ${provider}`);
+        }
+
+        function startEvaluation() {
+            const goal = document.getElementById('goal').value.trim();
+            const systemPrompt = document.getElementById('systemPrompt').value.trim();
+            const numCases = parseInt(document.getElementById('numCases').value);
+            const model = document.getElementById('model').value;
+            const provider = document.getElementById('provider').value;
+            const apiKey = document.getElementById('apiKey').value.trim();
+            const customCasesText = document.getElementById('customCases').value.trim();
+
+            // Validation
+            if (!goal) {
+                alert('Please enter an evaluation goal');
+                return;
+            }
+            if (!systemPrompt) {
+                alert('Please enter a system prompt');
+                return;
+            }
+
+            // Parse custom cases if provided
+            let testCases = null;
+            if (customCasesText) {
+                try {
+                    testCases = JSON.parse(customCasesText);
+                    if (!Array.isArray(testCases)) {
+                        alert('Custom test cases must be a JSON array');
+                        return;
+                    }
+                } catch (e) {
+                    alert('Invalid JSON in custom test cases: ' + e.message);
+                    return;
+                }
+            }
+
+            // Show loading state
+            showLoading(true);
+            document.getElementById('resultsSection').classList.remove('show');
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+
+            // Prepare request
+            const request = {
+                goal,
+                system_prompt: systemPrompt,
+                num_test_cases: numCases,
+                model,
+                provider,
+                api_key: apiKey || undefined,
+                test_cases: testCases
+            };
+
+            console.log('Sending evaluation request:', request);
+
+            // Send request
+            fetch('/api/evaluate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(request)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.detail || 'Evaluation failed');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                currentResults = data;
+                displayResults(data);
+                showLoading(false);
+                document.getElementById('resultsSection').classList.add('show');
+                document.getElementById('successMessage').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showLoading(false);
+                const errorMsg = document.getElementById('errorMessage');
+                errorMsg.textContent = '❌ Error: ' + error.message;
+                errorMsg.style.display = 'block';
+                document.getElementById('resultsSection').classList.add('show');
+            });
+        }
+
+        function displayResults(data) {
+            // Debug log
+            console.log("Received data:", data);
+            console.log("Average grade from data:", data.average_grade);
+            console.log("Total cases from data:", data.total_cases);
+            
+            // Update Average Grade
+            const avgGrade = data.average_grade;
+            const avgGradeElement = document.getElementById('avgGrade');
+            avgGradeElement.textContent = avgGrade.toFixed(1);
+            avgGradeElement.className = 'stat-value ' + getGradeClass(avgGrade);
+            console.log("Updated avgGrade element to:", avgGrade.toFixed(1));
+            
+            // Update Total Cases
+            const totalCasesElement = document.getElementById('totalCases');
+            totalCasesElement.textContent = data.total_cases;
+            console.log("Updated totalCases element to:", data.total_cases);
+            
+            // Update goal and prompt display
+            document.getElementById('displayGoal').value = data.goal;
+            document.getElementById('displayPrompt').value = data.system_prompt;
+
+            // Display results grid
+            const grid = document.getElementById('resultsGrid');
+            grid.innerHTML = '';
+            
+            // Calculate average from individual grades for verification
+            if (data.results && data.results.length > 0) {
+                const individualGrades = data.results.map(r => r.grade);
+                const calculatedAvg = individualGrades.reduce((a, b) => a + b, 0) / individualGrades.length;
+                console.log("Individual grades:", individualGrades);
+                console.log("Calculated average from individual grades:", calculatedAvg.toFixed(2));
+                console.log("Backend average grade:", data.average_grade);
+            }
+
+            data.results.forEach((result, index) => {
+                const item = createResultItem(result);
+                grid.appendChild(item);
+            });
+        }
+
+        function createResultItem(result) {
+            const item = document.createElement('div');
+            item.className = 'result-item';
+            const grade = result.grade || 5;
+            const gradeClass = getGradeClass(grade);
+
+            item.innerHTML = `
+                <div class="result-task">
+                    <strong>Q${result.index || ''}: </strong>${result.task}
+                </div>
+                <div class="result-response">
+                    ${escapeHtml(result.response)}
+                </div>
+                <div class="result-grade">
+                    <div class="grade-badge ${gradeClass}">${grade}</div>
+                    <div class="grade-info">
+                        <div><strong>Grade: ${grade}/10</strong></div>
+                        <div class="grade-reasoning">
+                            <strong>Reasoning:</strong> ${escapeHtml(result.reasoning)}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return item;
+        }
+
+        function getGradeClass(grade) {
+            if (grade >= 8) return 'excellent';
+            if (grade >= 6) return 'good';
+            if (grade >= 4) return 'fair';
+            return 'poor';
+        }
+
+        function showLoading(show) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+            const btn = document.querySelector('.btn-primary');
+            btn.disabled = show;
+            document.getElementById('btnText').style.display = show ? 'none' : 'inline';
+            document.getElementById('btnSpinner').style.display = show ? 'inline' : 'none';
+        }
+
+        function clearForm() {
+            document.getElementById('goal').value = '';
+            document.getElementById('systemPrompt').value = '';
+            document.getElementById('customCases').value = '';
+            document.getElementById('numCases').value = '10';
+            document.getElementById('apiKey').value = '';
+            document.getElementById('provider').value = 'groq';
+            updateProviderUI();
+        }
+
+        // Initialize UI on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProviderUI();
+        });
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function downloadResults() {
+            if (!currentResults) {
+                alert('No results to download');
+                return;
+            }
+
+            const dataStr = JSON.stringify(currentResults, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `evaluation-results-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, m => map[m]);
+        }
+
+        // Load sample data on page load
+        window.addEventListener('load', () => {
+            console.log('LLM Evaluation System loaded');
+        });
+    </script>
+</body>
+</html>

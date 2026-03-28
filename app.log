@@ -1,0 +1,225 @@
+2026-03-28 12:42:54,489 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 12:42:54,495 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 12:43:04,143 - __main__ - INFO - Received evaluation request for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:43:04,144 - __main__ - INFO - Generating 10 test cases
+2026-03-28 12:43:04,144 - lib.test_generator - INFO - Generated 10 test cases for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:43:04,145 - __main__ - INFO - Generated 10 test cases
+2026-03-28 12:43:04,145 - __main__ - INFO - Created evaluation ID: bccdf6de-ef6c-40bf-a56f-d711888d3558
+2026-03-28 12:43:04,146 - __main__ - INFO - Initializing evaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:43:04,160 - lib.llm_evaluator - INFO - Initializing LLMEvaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:43:05,544 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
+2026-03-28 12:43:05,545 - __main__ - INFO - Starting evaluation bccdf6de-ef6c-40bf-a56f-d711888d3558
+2026-03-28 12:43:05,545 - lib.llm_evaluator - INFO - Generating responses for 10 test cases
+2026-03-28 12:43:06,663 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:07,841 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:08,397 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:09,536 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:09,793 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:13,396 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:14,341 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:16,047 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:18,134 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:19,456 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:19,458 - lib.llm_evaluator - INFO - Starting grading for 10 responses
+2026-03-28 12:43:20,033 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:20,568 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:21,109 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:21,713 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:22,025 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:22,483 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:22,950 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:23,400 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:23,852 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:24,434 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:24,436 - lib.llm_evaluator - INFO - Individual grades collected: [8, 2, 8, 8, 1, 2, 9, 8, 2, 2]
+2026-03-28 12:43:24,436 - lib.llm_evaluator - INFO - Total grades count: 10
+2026-03-28 12:43:24,436 - lib.llm_evaluator - INFO - Sum of grades: 50
+2026-03-28 12:43:24,437 - lib.llm_evaluator - INFO - Calculated average grade: 5.00/10
+2026-03-28 12:43:24,437 - __main__ - INFO - Evaluation bccdf6de-ef6c-40bf-a56f-d711888d3558 completed. Average grade: 5.0
+2026-03-28 12:43:24,438 - __main__ - INFO - Returning response with average_grade: 5.0
+2026-03-28 12:43:49,315 - __main__ - INFO - Received evaluation request for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:43:49,315 - __main__ - INFO - Generating 6 test cases
+2026-03-28 12:43:49,315 - lib.test_generator - INFO - Generated 6 test cases for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:43:49,316 - __main__ - INFO - Generated 6 test cases
+2026-03-28 12:43:49,316 - __main__ - INFO - Created evaluation ID: c81eacb7-3335-4914-a265-96c44428e6af
+2026-03-28 12:43:49,317 - __main__ - INFO - Initializing evaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:43:49,317 - lib.llm_evaluator - INFO - Initializing LLMEvaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:43:50,603 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
+2026-03-28 12:43:50,604 - __main__ - INFO - Starting evaluation c81eacb7-3335-4914-a265-96c44428e6af
+2026-03-28 12:43:50,604 - lib.llm_evaluator - INFO - Generating responses for 6 test cases
+2026-03-28 12:43:51,870 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:52,835 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:53,029 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:55,015 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:55,988 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:56,497 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:56,499 - lib.llm_evaluator - INFO - Starting grading for 6 responses
+2026-03-28 12:43:57,126 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:57,696 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:58,254 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:58,741 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:59,193 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:59,623 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:43:59,625 - lib.llm_evaluator - INFO - Individual grades collected: [9, 2, 2, 2, 6, 8]
+2026-03-28 12:43:59,625 - lib.llm_evaluator - INFO - Total grades count: 6
+2026-03-28 12:43:59,625 - lib.llm_evaluator - INFO - Sum of grades: 29
+2026-03-28 12:43:59,626 - lib.llm_evaluator - INFO - Calculated average grade: 4.83/10
+2026-03-28 12:43:59,626 - __main__ - INFO - Evaluation c81eacb7-3335-4914-a265-96c44428e6af completed. Average grade: 4.83
+2026-03-28 12:43:59,626 - __main__ - INFO - Returning response with average_grade: 4.83
+2026-03-28 12:54:58,540 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 12:54:58,547 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 12:55:06,290 - __main__ - INFO - Received evaluation request for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:55:06,291 - __main__ - INFO - Generating 10 test cases
+2026-03-28 12:55:06,291 - lib.test_generator - INFO - Generated 10 test cases for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:55:06,291 - __main__ - INFO - Generated 10 test cases
+2026-03-28 12:55:06,292 - __main__ - INFO - Created evaluation ID: c6aa33e8-8fc8-451f-b54b-9e065d401943
+2026-03-28 12:55:06,292 - __main__ - INFO - Initializing evaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:55:06,293 - lib.llm_evaluator - INFO - Initializing LLMEvaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:55:07,855 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
+2026-03-28 12:55:07,855 - __main__ - INFO - Starting evaluation c6aa33e8-8fc8-451f-b54b-9e065d401943
+2026-03-28 12:55:07,856 - lib.llm_evaluator - INFO - Generating responses for 10 test cases
+2026-03-28 12:55:09,961 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:11,605 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:11,928 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:12,794 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:14,535 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:16,269 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:16,531 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:18,791 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:19,391 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:21,304 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:21,306 - lib.llm_evaluator - INFO - Starting grading for 10 responses
+2026-03-28 12:55:21,974 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:22,464 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:23,071 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:23,470 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:24,001 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:24,639 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:24,926 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:25,336 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:25,732 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:26,118 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:55:26,119 - lib.llm_evaluator - INFO - Individual grades collected: [9, 9, 6, 6, 8, 8, 10, 2, 6, 6]
+2026-03-28 12:55:26,120 - lib.llm_evaluator - INFO - Total grades count: 10
+2026-03-28 12:55:26,120 - lib.llm_evaluator - INFO - Sum of grades: 70
+2026-03-28 12:55:26,120 - lib.llm_evaluator - INFO - Calculated average grade: 7.00/10
+2026-03-28 12:55:26,121 - __main__ - INFO - Evaluation c6aa33e8-8fc8-451f-b54b-9e065d401943 completed. Average grade: 7.0
+2026-03-28 12:55:26,121 - __main__ - INFO - Returning response with average_grade: 7.0
+2026-03-28 12:57:20,662 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 12:57:20,667 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 12:57:27,776 - __main__ - INFO - Received evaluation request for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:57:27,777 - __main__ - INFO - Generating 10 test cases
+2026-03-28 12:57:27,778 - lib.test_generator - INFO - Generated 10 test cases for goal: A math teacher bot that provides educational guida...
+2026-03-28 12:57:27,778 - __main__ - INFO - Generated 10 test cases
+2026-03-28 12:57:27,779 - __main__ - INFO - Created evaluation ID: 6e40163f-1636-4033-8012-e8cbcce4ebcf
+2026-03-28 12:57:27,779 - __main__ - INFO - Initializing evaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:57:27,779 - lib.llm_evaluator - INFO - Initializing LLMEvaluator with model: llama-3.3-70b-versatile
+2026-03-28 12:57:29,270 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
+2026-03-28 12:57:29,270 - __main__ - INFO - Starting evaluation 6e40163f-1636-4033-8012-e8cbcce4ebcf
+2026-03-28 12:57:29,270 - lib.llm_evaluator - INFO - Generating responses for 10 test cases
+2026-03-28 12:57:30,584 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:31,996 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:32,638 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:34,453 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:37,019 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:37,966 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:38,263 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:38,546 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:40,259 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:43,465 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:43,466 - lib.llm_evaluator - INFO - Starting grading for 10 responses
+2026-03-28 12:57:43,903 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:44,400 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:44,986 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:45,392 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:45,903 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:46,517 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:46,825 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:47,456 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:47,981 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:48,556 - httpx - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-03-28 12:57:48,557 - lib.llm_evaluator - INFO - Individual grades collected: [6, 9, 9, 6, 9, 8, 2, 8, 2, 9]
+2026-03-28 12:57:48,558 - lib.llm_evaluator - INFO - Total grades count: 10
+2026-03-28 12:57:48,558 - lib.llm_evaluator - INFO - Sum of grades: 68
+2026-03-28 12:57:48,558 - lib.llm_evaluator - INFO - Calculated average grade: 6.80/10
+2026-03-28 12:57:48,559 - __main__ - INFO - Evaluation 6e40163f-1636-4033-8012-e8cbcce4ebcf completed. Average grade: 6.8
+2026-03-28 12:57:48,559 - __main__ - INFO - Returning response with average_grade: 6.8
+2026-03-28 13:03:22,644 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 13:03:22,651 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 13:04:52,029 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 13:04:52,036 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 13:09:34,758 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 13:09:34,770 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 13:11:25,116 - __main__ - INFO - Received evaluation request for goal: A math teacher bot that provides educational guida...
+2026-03-28 13:11:25,118 - __main__ - INFO - Provider: anthropic, Model: claude-haiku-4-5
+2026-03-28 13:11:25,118 - __main__ - INFO - Generating 10 test cases
+2026-03-28 13:11:25,119 - lib.test_generator - INFO - Generated 10 test cases for goal: A math teacher bot that provides educational guida...
+2026-03-28 13:11:25,119 - __main__ - INFO - Generated 10 test cases
+2026-03-28 13:11:25,120 - __main__ - INFO - Created evaluation ID: cc40f448-a80a-4cc1-8205-580c2504c3ea
+2026-03-28 13:11:25,120 - __main__ - INFO - Initializing evaluator with provider: anthropic, model: claude-haiku-4-5
+2026-03-28 13:11:25,120 - lib.llm_evaluator - INFO - Initializing LLMEvaluator with provider: anthropic, model: claude-haiku-4-5
+2026-03-28 13:11:25,127 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
+2026-03-28 13:11:25,127 - __main__ - INFO - Starting evaluation cc40f448-a80a-4cc1-8205-580c2504c3ea
+2026-03-28 13:11:25,128 - lib.llm_evaluator - INFO - Generating responses for 10 test cases
+2026-03-28 13:11:30,067 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:32,290 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:34,287 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:37,950 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:41,534 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:45,529 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:49,612 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:53,924 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:56,177 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:59,044 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:11:59,047 - lib.llm_evaluator - INFO - Starting grading for 10 responses
+2026-03-28 13:12:02,319 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:04,779 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:07,236 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:10,615 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:14,201 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:16,656 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:19,443 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:22,903 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:25,463 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:27,717 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:12:27,719 - lib.llm_evaluator - INFO - Individual grades collected: [2, 9, 8, 3, 3, 2, 2, 2, 7, 2]
+2026-03-28 13:12:27,719 - lib.llm_evaluator - INFO - Total grades count: 10
+2026-03-28 13:12:27,720 - lib.llm_evaluator - INFO - Sum of grades: 40
+2026-03-28 13:12:27,734 - lib.llm_evaluator - INFO - Calculated average grade: 4.00
+2026-03-28 13:12:27,734 - __main__ - INFO - Evaluation cc40f448-a80a-4cc1-8205-580c2504c3ea completed. Average grade: 4.0
+2026-03-28 13:12:27,735 - __main__ - INFO - Returning response with average_grade: 4.0
+2026-03-28 13:14:11,155 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 13:14:11,175 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 13:14:21,592 - __main__ - INFO - Received evaluation request for goal: A math teacher bot that provides educational guida...
+2026-03-28 13:14:21,594 - __main__ - INFO - Provider: anthropic, Model: claude-haiku-4-5
+2026-03-28 13:14:21,594 - __main__ - INFO - Generating 1 test cases
+2026-03-28 13:14:21,595 - lib.test_generator - INFO - Generated 1 test cases for goal: A math teacher bot that provides educational guida...
+2026-03-28 13:14:21,596 - __main__ - INFO - Generated 1 test cases
+2026-03-28 13:14:21,596 - __main__ - INFO - Created evaluation ID: e8bffec4-b755-4024-8db5-87cc609613f0
+2026-03-28 13:14:21,596 - __main__ - INFO - Initializing evaluator with provider: anthropic, model: claude-haiku-4-5
+2026-03-28 13:14:21,597 - lib.llm_evaluator - INFO - Initializing LLMEvaluator with provider: anthropic, model: claude-haiku-4-5
+2026-03-28 13:14:21,598 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
+2026-03-28 13:14:21,598 - __main__ - INFO - Starting evaluation e8bffec4-b755-4024-8db5-87cc609613f0
+2026-03-28 13:14:21,599 - lib.llm_evaluator - INFO - Generating responses for 1 test cases
+2026-03-28 13:14:25,305 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:14:25,349 - lib.llm_evaluator - INFO - Starting grading for 1 responses
+2026-03-28 13:14:29,176 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:14:29,178 - lib.llm_evaluator - INFO - Individual grades collected: [8]
+2026-03-28 13:14:29,178 - lib.llm_evaluator - INFO - Total grades count: 1
+2026-03-28 13:14:29,179 - lib.llm_evaluator - INFO - Sum of grades: 8
+2026-03-28 13:14:29,179 - lib.llm_evaluator - INFO - Calculated average grade: 8.00
+2026-03-28 13:14:29,180 - __main__ - INFO - Evaluation e8bffec4-b755-4024-8db5-87cc609613f0 completed. Average grade: 8.0
+2026-03-28 13:14:29,180 - __main__ - INFO - Returning response with average_grade: 8.0
+2026-03-28 13:15:14,424 - __main__ - INFO - Starting LLM Evaluation System
+2026-03-28 13:15:14,436 - __main__ - INFO - Environment variables loaded from .env
+2026-03-28 13:15:18,113 - __main__ - INFO - Received evaluation request for goal: A math teacher bot that provides educational guida...
+2026-03-28 13:15:18,114 - __main__ - INFO - Provider: anthropic, Model: claude-haiku-4-5
+2026-03-28 13:15:18,114 - __main__ - INFO - Generating 1 test cases
+2026-03-28 13:15:18,115 - lib.test_generator - INFO - Generated 1 test cases for goal: A math teacher bot that provides educational guida...
+2026-03-28 13:15:18,115 - __main__ - INFO - Generated 1 test cases
+2026-03-28 13:15:18,115 - __main__ - INFO - Created evaluation ID: d8ae84ef-af6d-49d8-98e7-840cd6f08ee8
+2026-03-28 13:15:18,116 - __main__ - INFO - Initializing evaluator with provider: anthropic, model: claude-haiku-4-5
+2026-03-28 13:15:18,116 - lib.llm_evaluator - INFO - Initializing LLMEvaluator with provider: anthropic, model: claude-haiku-4-5
+2026-03-28 13:15:18,117 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
+2026-03-28 13:15:18,117 - __main__ - INFO - Starting evaluation d8ae84ef-af6d-49d8-98e7-840cd6f08ee8
+2026-03-28 13:15:18,117 - lib.llm_evaluator - INFO - Generating responses for 1 test cases
