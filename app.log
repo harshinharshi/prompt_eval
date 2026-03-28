@@ -223,3 +223,12 @@
 2026-03-28 13:15:18,117 - lib.llm_evaluator - INFO - LLMEvaluator initialized successfully
 2026-03-28 13:15:18,117 - __main__ - INFO - Starting evaluation d8ae84ef-af6d-49d8-98e7-840cd6f08ee8
 2026-03-28 13:15:18,117 - lib.llm_evaluator - INFO - Generating responses for 1 test cases
+2026-03-28 13:15:23,442 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:15:23,489 - lib.llm_evaluator - INFO - Starting grading for 1 responses
+2026-03-28 13:15:26,666 - httpx - INFO - HTTP Request: POST https://api.anthropic.com/v1/messages "HTTP/1.1 200 OK"
+2026-03-28 13:15:26,668 - lib.llm_evaluator - INFO - Individual grades collected: [2]
+2026-03-28 13:15:26,669 - lib.llm_evaluator - INFO - Total grades count: 1
+2026-03-28 13:15:26,669 - lib.llm_evaluator - INFO - Sum of grades: 2
+2026-03-28 13:15:26,669 - lib.llm_evaluator - INFO - Calculated average grade: 2.00
+2026-03-28 13:15:26,670 - __main__ - INFO - Evaluation d8ae84ef-af6d-49d8-98e7-840cd6f08ee8 completed. Average grade: 2.0
+2026-03-28 13:15:26,670 - __main__ - INFO - Returning response with average_grade: 2.0
