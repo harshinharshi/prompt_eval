@@ -59,6 +59,8 @@ Your `.env` file:
 GROQ_API_KEY=gsk_your-actual-api-key-here
 ```
 
+⚠️ **NEVER commit actual API keys** - Always use placeholders in documentation
+
 The `conftest.py` loads this automatically from `.env` before tests run.
 
 ## Key Files

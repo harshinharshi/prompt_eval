@@ -8,4 +8,39 @@ wheels/
 
 # Virtual environments
 .venv
+venv/
+env/
+
+# Environment & Secrets (CRITICAL - Never commit)
 .env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+.env.development
+secrets/
+*.key
+*.pem
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+app.log
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build outputs
+.mypy_cache/
+.ruff_cache/
